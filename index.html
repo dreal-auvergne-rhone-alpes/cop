@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Défis Climat 2030</title>
+	<meta name="description" content="Indicateurs territoriaux de la COP Auvergne-Rhône-Alpes">
+    <meta name="keywords" content="COP, Auvergne-Rhône-Alpes, Aura, ARA, Climat, CO2, GES, Défis, 2030, Conférence des parties, départements, EPCI, territoires, ain, allier, ardèche, cantal, drôme, isère, loire, haute-loire, puy-de-dôme, rhône, savoie, haute-savoie, biodiversité, ressources, transports, mobilité, bâtiment, industrie, produits bois, forêt, énergie, déchets, indicateurs, leviers, enjeu, graphiques, données, france nation verte">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCJTHME86H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QCJTHME86H');
+</script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">	
+    <link rel="icon" href="cop.jpg" />
+</head>
+<body>
+
+<header class="site-header">
+  <a href="." class="header-link">
+    <img src="logo.png" alt="Logo" class="logo">
+    <div class="header-text">
+      <div class="header-title">Défis Climat 2030 <span class="badge badge-dept" style="margin-right: 15px;">BETA</span></div>
+      <div class="header-subtitle">Indicateurs territoriaux de la COP Auvergne-Rhône-Alpes</div>
+    </div>
+  </a>
+</header>
+
+<div class="mobile-menu-toggle">
+  ☰ Menu
+</div>
+
+<nav class="sub-nav">
+  <a href=".">Accueil</a>
+  <a href="sources.html">Sources</a>
+  <a href="https://dreal.statistiques.developpement-durable.gouv.fr/cop/aura/">Indicateurs régionaux</a>
+</nav>
+
+<div class="app-container">
+    <div class="main-content">
+        <div id="loadingMessage">TÉLÉCHARGEMENT DU FICHIER CSV...</div>
+
+        <div class="header-content">
+            <h2>
+                <span id="displayTitle">Initialisation...</span>
+                <span id="displayBadge" class="badge">Niveau</span>
+            </h2>
+            <div class="subtitle" id="displaySubtitle">Chargement des données</div>
+            
+            <div class="selector-container">
+                <div class="control-group selector-item">
+                    <label for="deptSelector">Département</label>
+                    <select id="deptSelector" disabled></select>
+                </div>
+                
+                <div class="control-group selector-item">
+                    <label for="epciSelector">EPCI du territoire</label>
+                    <select id="epciSelector" disabled></select>
+                </div>
+            </div>
+            
+        </div>
+		
+		<div class="chart-card">
+		<div class="chart-container">
+   <div class="chart-title">Émissions de gaz à effet de serre</div><div id="chart1" class="plotly-graph-div"></div>
+</div></div>	
+
+<div class="chart-card" style="margin-top: 50px; margin-bottom: 30px; padding: 15px;">
+    
+    <h2 style="font-size: 1.8em; margin-bottom: 5px; color: #2c3e50;">
+        Biodiversité et ressources naturelles
+    </h2>
+    
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <span class="territory-badge-display badge"></span>
+        
+        <span class="territory-name-display" style="font-size: 1.2em; font-weight: bold; margin-left: 10px; color: #3498db;"></span>
+    </div>
+    
+</div>
+	
+	<div class="charts-grid">
+	
+	   <div class="chart-card">
+        <div class="chart-title">Volumes d’eau prélevée (hors énergie et eau turbinée)</div>
+        <div id="chart12" class="plotly-graph-div"></div>
+    </div>
+
+	</div>
+	
+		<div class="charts-grid">
+		
+    <div class="chart-card">
+        <div class="chart-title">Restauration de la continuité écologique des cours d'eau </div>
+        <div id="chart14" class="plotly-graph-div"></div>
+    </div>
+	
+		
+ 	<div class="chart-card">
+        <div class="chart-title">Proportion du territoire couvert par des aires protégées sous protection forte</div>
+        <div id="chart15" class="plotly-graph-div"></div>
+    </div>
+	
+</div>
+
+<div class="charts-grid">
+	
+	   <div class="chart-card">
+        <div class="chart-title">Evolution de la consommation d’espaces naturels, agricoles et forestiers (ENAF)</div>
+        <div id="chart13" class="plotly-graph-div"></div>
+    </div>
+
+	</div>
+
+	<br>
+
+<div class="chart-card" style="margin-top: 50px; margin-bottom: 30px; padding: 15px;">
+    
+    <h2 style="font-size: 1.8em; margin-bottom: 5px; color: #2c3e50;">
+        Transport et mobilités
+    </h2>
+    
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <span class="territory-badge-display badge"></span>
+        
+        <span class="territory-name-display" style="font-size: 1.2em; font-weight: bold; margin-left: 10px; color: #3498db;"></span>
+    </div>
+    
+</div>
+
+<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Pourcentage de voitures particulières électriques</div>
+        <div id="chart7" class="plotly-graph-div"></div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-title">Linéaire d'aménagements cyclables</div>
+        <div id="chart8" class="plotly-graph-div"></div>
+    </div>
+
+    </div>
+
+<div class="chart-card" style="margin-top: 50px; margin-bottom: 30px; padding: 15px;">
+    
+    <h2 style="font-size: 1.8em; margin-bottom: 5px; color: #2c3e50;">
+        Bâtiment
+    </h2>
+    
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <span class="territory-badge-display badge"></span>
+        
+        <span class="territory-name-display" style="font-size: 1.2em; font-weight: bold; margin-left: 10px; color: #3498db;"></span>
+    </div>
+    
+</div>
+
+<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Consommation énergétique du parc résidentiel</div>
+        <div id="chart2" class="plotly-graph-div"></div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-title">Consommation énergétique du parc tertiaire</div>
+        <div id="chart3" class="plotly-graph-div"></div>
+    </div>
+
+    </div>
+	
+<div class="chart-card" style="margin-top: 50px; margin-bottom: 30px; padding: 15px;">
+    
+    <h2 style="font-size: 1.8em; margin-bottom: 5px; color: #2c3e50;">
+        Energie et déchets
+    </h2>
+    
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <span class="territory-badge-display badge"></span>
+        
+        <span class="territory-name-display" style="font-size: 1.2em; font-weight: bold; margin-left: 10px; color: #3498db;"></span>
+    </div>
+    
+</div>
+	
+	<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Puissance d’électricité renouvelable installée (éolienne, solaire et hydraulique)</div>
+        <div id="chart4" class="plotly-graph-div"></div>
+    </div>
+    
+</div>
+	<br>
+	<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Production annuelle d’énergie renouvelable thermique par filière</div>
+        <div id="chart5" class="plotly-graph-div"></div>
+    </div>
+    
+</div>
+<br>
+<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Chaleur renouvelable livrée par les réseaux de chaleur et froid</div>
+        <div id="chart6" class="plotly-graph-div"></div>
+    </div>
+	    <div class="chart-card">
+        <div class="chart-title">Quantité de déchets enfouis annuellement</div>
+        <div id="chart9" class="plotly-graph-div"></div>
+    </div>
+
+    
+</div>
+	<br>
+	<div class="charts-grid">
+    
+    <div class="chart-card">
+        <div class="chart-title">Pourcentage de déchets recyclés ou valorisés énergétiquement</div>
+        <div id="chart10" class="plotly-graph-div"></div>
+    </div>
+	    <div class="chart-card">
+        <div class="chart-title">Nombre d’espaces de réemploi</div>
+        <div id="chart11" class="plotly-graph-div"></div>
+    </div>
+
+    
+</div>
+		
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-top">
+            <a href="." class="footer-logo-link">
+                <img src="logo2.jpg" alt="Logo gauche" class="footer-logo">
+            </a>
+
+            <div class="footer-text-block">
+                <a href="." class="footer-center-logo-link">
+                    <img src="bandeau2.jpg" alt="Logo centre" class="footer-center-logo">
+                </a>
+                <p class="footer-phrase">
+                    <br>Un outil de suivi des indicateurs de la
+                    <a href="https://www.prefectures-regions.gouv.fr/auvergne-rhone-alpes/Region-et-institutions/L-action-de-l-Etat/Environnement-developpement-durable-et-prevention-des-risques/Conferences-des-parties-COP-en-Auvergne-Rhone-Alpes" class="footer-link">COP Auvergne-Rhône-Alpes</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <a href="mentions.html" class="footer-mentions">Mentions légales</a>
+            <p class="footer-license">
+                Sauf mention explicite de propriété intellectuelle détenue par des tiers,
+                les contenus de ce site sont proposés sous
+                <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/">
+                    Licence Ouverte Version 2.0
+                </a>.
+            </p>
+        </div>
+    </div>
+</footer>
+<script src="script.js?v=1" defer></script>
+</body>
+</html>
